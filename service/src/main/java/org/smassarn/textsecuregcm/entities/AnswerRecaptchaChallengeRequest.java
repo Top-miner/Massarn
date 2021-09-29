@@ -1,0 +1,25 @@
+/*
+ * Copyright 2021 Massarn Messenger, LLC
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+package org.smassarn.textsecuregcm.entities;
+
+import javax.validation.constraints.NotBlank;
+
+public class AnswerRecaptchaChallengeRequest extends AnswerChallengeRequest {
+
+  @NotBlank
+  private String token;
+
+  @NotBlank
+  private String captcha;
+
+  public String getToken() {
+    return token;
+  }
+
+  public String getCaptcha() {
+    return captcha;
+  }
+}

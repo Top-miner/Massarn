@@ -1,0 +1,268 @@
+twilio: # Twilio gateway configuration
+  accountId: 
+  accountToken: 
+  nanpaMessagingServiceSid: # Twilio SID for the messaging service to use for NANPA.
+  messagingServiceSid: # Twilio SID for the message service to use for non-NANPA.
+  verifyServiceSid: # Twilio SID for a Verify service
+  localDomain: # Domain Twilio can connect back to for calls. Should be domain of your service.
+  defaultClientVerificationTexts:
+    ios: # Text to use for the verification message on iOS. Will be passed to String.format with the verification code as argument 1.
+    androidNg: # Text to use for the verification message on android-ng client types. Will be passed to String.format with the verification code as argument 1.
+    android202001: # Text to use for the verification message on android-2020-01 client types. Will be passed to String.format with the verification code as argument 1.
+    android202103: # Text to use for the verification message on android-2021-03 client types. Will be passed to String.format with the verification code as argument 1.
+    generic: # Text to use when the client type is unrecognized. Will be passed to String.format with the verification code as argument 1.
+  regionalClientVerificationTexts: # Map of country codes to custom texts
+    999: # example country code
+      ios:
+      # … all keys from defaultClientVerificationTexts are required
+  androidAppHash: # Hash appended to Android
+  verifyServiceFriendlyName: # Service name used in template. Requires Twilio account rep to enable
+
+push:
+  queueSize: # Size of push pending queue
+
+turn: # TURN server configuration
+  secret: # TURN server secret
+  uris:
+    - stun:massarn.org:80
+    - stun:massarn.org.com:443
+    - turn:massarn.org:443?transport=udp
+    - turn:etc.com:80?transport=udp
+
+cacheCluster: # Redis server configuration for cache cluster
+  urls:
+    - redis://redis.massarn.org:6379/
+
+clientPresenceCluster: # Redis server configuration for client presence cluster
+  urls:
+    - redis://redis.massarn.org:6379/
+
+pubsub: # Redis server configuration for pubsub cluster
+  url: redis://redis.massarn.org:6379/
+  replicaUrls:
+    - redis://redis.massarn.org:6379/
+
+pushSchedulerCluster: # Redis server configuration for push scheduler cluster
+  urls:
+    - redis://redis.massarn.org:6379/
+
+rateLimitersCluster: # Redis server configuration for rate limiters cluster
+  urls:
+    - redis://redis.massarn.org:6379/
+
+directory:
+  client: # Configuration for interfacing with Contact Discovery Service cluster
+    userAuthenticationTokenSharedSecret: # hex-encoded secret shared with CDS used to generate auth tokens for Massarn users
+    userAuthenticationTokenUserIdSecret: # hex-encoded secret shared among Massarn-Servers to obscure user phone numbers from CDS
+  sqs:
+    accessKey:      # AWS SQS accessKey
+    accessSecret:   # AWS SQS accessSecret
+    queueUrls:      # AWS SQS queue urls
+      - https://sqs.massarn.org/directory.fifo
+  server: # One or more CDS servers
+    - replicationName:               # CDS replication name
+      replicationUrl:                # CDS replication endpoint base url
+      replicationPassword:           # CDS replication endpoint password
+      replicationCaCertificate:      # CDS replication endpoint TLS certificate trust root
+
+messageCache: # Redis server configuration for message store cache
+  persistDelayMinutes:
+
+  cluster:
+    urls:
+      - redis://redis.massarn.org:6379/
+
+metricsCluster:
+  urls:
+    - redis://redis.massarn.org:6379/
+
+messageDynamoDb: # DynamoDB table configuration
+  region:
+  tableName:
+
+keysDynamoDb: # DynamoDB table configuration
+  region:
+  tableName:
+
+accountsDynamoDb: # DynamoDB table configuration
+  region:
+  tableName:
+  phoneNumberTableName:
+
+deletedAccountsDynamoDb: # DynamoDb table configuration
+  region:
+  tableName:
+  needsReconciliationIndexName:
+
+deletedAccountsLockDynamoDb: # DynamoDb table configuration
+  region:
+  tableName:
+
+migrationDeletedAccountsDynamoDb: # DynamoDB table configuration
+  region:
+  tableName:
+
+migrationRetryAccountsDynamoDb: # DynamoDB table configuration
+  region:
+  tableName:
+
+pendingAccountsDynamoDb: # DynamoDB table configuration
+  region:
+  tableName:
+
+pendingDevicesDynamoDb: # DynamoDB table configuration
+  region:
+  tableName:
+
+pushChallengeDynamoDb: # DynamoDB table configuration
+  region:
+  tableName:
+
+reportMessageDynamoDb: # DynamoDB table configuration
+  region:
+  tableName:
+
+awsAttachments: # AWS S3 configuration
+  accessKey:
+  accessSecret:
+  bucket:
+  region:
+
+gcpAttachments: # GCP Storage configuration
+  domain:
+  email:
+  maxSizeInBytes:
+  pathPrefix:
+  rsaSigningKey:
+
+abuseDatabase: # Postgresql database configuration
+  driverClass: org.postgresql.Driver
+  user:
+  password:
+  url:
+
+accountsDatabase: # Postgresql database configuration
+  driverClass: org.postgresql.Driver
+  user:
+  password:
+  url:
+
+accountDatabaseCrawler:
+  chunkSize: # accounts per run
+  chunkIntervalMs: # time per run
+
+dynamoDbMigrationCrawler:
+  chunkSize: # accounts per run
+  chunkIntervalMs: # time per run
+
+apn: # Apple Push Notifications configuration
+  sandbox: true
+  bundleId:
+  keyId:
+  teamId:
+  signingKey:
+
+gcm: # GCM Configuration
+  senderId:
+  apiKey:
+
+cdn:
+  accessKey: # AWS Access Key ID
+  accessSecret: # AWS Access Secret
+  bucket: # S3 Bucket name
+  region: # AWS region
+
+datadog:
+  apiKey:
+  environment:
+
+unidentifiedDelivery:
+  certificate:
+  privateKey:
+  expiresDays:
+
+voiceVerification:
+  url: https://cdn-ca.massarn.org/verification/
+  locales:
+    - en
+
+recaptcha:
+  secret:
+
+recaptchaV2:
+  siteKey:
+  scoreFloor:
+  projectPath:
+  credentialConfigurationJson:
+
+storageService:
+  uri:
+  userAuthenticationTokenSharedSecret:
+  storageCaCertificate:
+
+backupService:
+  uri:
+  userAuthenticationTokenSharedSecret:
+  backupCaCertificate:
+
+zkConfig:
+  serverPublic:
+  serverSecret:
+  enabled:
+
+appConfig:
+  application:
+  environment:
+  configuration:
+
+remoteConfig:
+  authorizedTokens:
+    - # 1st authorized token
+    - # 2nd authorized token
+    - # ...
+    - # Nth authorized token
+  globalConfig: # keys and values that are given to clients on GET /v1/config
+
+
+paymentsService:
+  userAuthenticationTokenSharedSecret: # hex-encoded 32-byte secret shared with MobileCoin services used to generate auth tokens for Massarn users
+  fixerApiKey:
+  paymentCurrencies:
+    -
+
+torExitNodeList:
+  s3Region:
+  s3Bucket:
+  objectKey:
+  maxSize:
+
+asnTable:
+  s3Region:
+  s3Bucket:
+  objectKey:
+  maxSize:
+
+donation:
+  uri: # value
+  apiKey: # value
+  supportedCurrencies:
+    - # 1st supported currency
+    - # 2nd supported currency
+    - # ...
+    - # Nth supported currency
+  circuitBreaker:
+    failureRateThreshold: # value
+    ringBufferSizeInHalfOpenState: # value
+    ringBufferSizeInClosedState: # value
+    waitDurationInOpenStateInSeconds: # value
+  retry:
+    maxAttempts: # value
+    waitDuration: # value
+
+badges:
+  badges:
+    - id: TEST
+      imageUrl: https://massarn.org/test-badge
+      category: other
+  badgeIdsEnabledForAll:
+    - TEST
